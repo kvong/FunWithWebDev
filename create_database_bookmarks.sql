@@ -39,7 +39,7 @@ VALUES
     ('Shopping', 'Ebay', 'https://www.ebay.com/', 'fas fa-shopping-cart', ''),
     ('School', 'Canvas', 'https://umsl.instructure.com/', 'fas fa-chalkboard-teacher', ''),
     ('School', 'Deep Learning', 'https://github.com/badriadhikari/DL-2020spring', 'fas fa-brain', ''),
-    ('School', 'UMSL Email', 'https://login.microsoftonline.com/common/oauth2/authorize?client_id=00000002-0000-0ff1-ce00-000000000000&redirect_uri=https%3a%2f%2foutlook.office365.com%2fmail%2f&resource=00000002-0000-0ff1-ce00-000000000000&response_mode=form_post&response_type=code+id', 'fas fa-mail-bulk', ''),
+    ('School', 'UMSL Email', 'https://login.microsoftonline.com', 'fas fa-mail-bulk', ''),
     ('School', 'Pearson', 'https://pi.pearsoned.com/v1/piapi/piui/signin?client_id=NimtqV7BcT00BM9xOXCQUFJYwF3RzEIk&login_success_url=https:%2F%2Fconsole.pearson.com%2Fconsole%2Fhome', 'fas fa-bookmark', ''),
     ('Coding', 'CodeWar', 'https://www.codewars.com/dashboard', 'fas fa-bookmark', ''),
     ('School', 'MyView', 'https://myview.umsl.edu/psp/csprds/?cmd=login&languageCd=ENG&', 'fas fa-bookmark', '');
