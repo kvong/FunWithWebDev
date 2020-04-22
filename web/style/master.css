@@ -1,0 +1,201 @@
+body {
+    font-family: monospace;
+    font-size: 14pt;
+    background-color: #1F1F1F;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background: url("../pics/alpinebackground.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    }
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+input{
+    padding: 8px 0px;
+    margin-bottom: 5px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.options{
+    width:100%
+}
+
+.bookmarkForm{
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    margin: 0px auto;
+    z-index: 1;
+}
+
+.required{
+    color: #bf443b;
+}
+
+.foot{
+    position:absolute;
+    text-align: right;
+    bottom: 1%;
+    right: 1%;
+    color: white;
+}
+
+.myButton {
+	box-shadow:inset 0px 1px 3px 0px #b8b8b8;
+	background:linear-gradient(to bottom, #8a8a8a 5%, #7d7d7d 100%);
+	background-color:#8a8a8a;
+	border-radius:5px;
+	border:1px solid #696969;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:15px;
+	font-weight:bold;
+	padding:11px 23px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #696969;
+}
+
+.myButton:hover {
+	background:linear-gradient(to bottom, #7d7d7d 5%, #8a8a8a 100%);
+	background-color:#7d7d7d;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+    text-align: center;
+    top: 25%;
+    left: 50%;
+    -ms-transform: translate(-50%, -25%);
+    transform: translate(-50%, -25%);
+    position: absolute;
+    color: black;
+    font-size: 40px;
+    animation-name: head_animation;
+    animation-duration: 1.5s;
+}
+
+.search-bar {
+    top: 34%;
+    left: 50%;
+    -ms-transform: translate(-40%, -50%);
+    transform: translate(-40%, -50%);
+    position: absolute;
+    text-align: center;
+    animation: table_animation 1.5s linear;
+    margin-bottom: 5px;
+}
+
+.search-bar input {
+    min-width: 500px;
+    border-radius: 5px;
+    color: #FFFFFF;
+    background-color: rgb(22, 24, 33, 1);
+    font-size: 18px;
+    border: 0px solid #161821;
+    width: 50%;
+    padding: 10px;
+}
+
+.terminal-container {
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 1080px;
+    border-collapse: separate;
+    border-spacing: 10px 5px;
+    animation: table_animation 2s linear;
+}
+
+.terminal-container2{
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-collapse: separate;
+    border-spacing: 10px 5px;
+    animation: table_animation 2s linear;
+}
+
+.bookmark-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.bookmark-set {
+    border: 2px solid #0B0B0B;
+    border-radius: 5px;
+    flex: 1 0 100px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    background-color: #5E5E5E;
+}
+
+.bookmark-title {
+    font-size: 14pt;
+    font-weight: bold;
+    text-align: center;
+    padding: 4px;
+    margin-bottom: 5px;
+    color: #FFFFFF;
+    background-color: #0B0B0B;
+}
+
+.bookmark {
+    font-size: 12pt;
+    margin-bottom: 2px;
+    padding: 4px;
+    text-align: center;
+    color: #F9F9F9;
+}
+
+.bookmark a:hover {
+    font-weight: bold;
+}
+
+@keyframes head_animation {
+    0%   {opacity: 0;}
+    10%  {opacity: .1;}
+    20%  {opacity: .2;}
+    30%  {opacity: .3;}
+    40%  {opacity: .4;}
+    50%  {opacity: .5;}
+    60%  {opacity: .6;}
+    80%  {opacity: .7;}
+    80%  {opacity: .8;}
+    90%  {opacity: .9;}
+    100% {opacity: 1;}
+}
+
+@keyframes fade_animation {
+    0%   {opacity: 0;}
+    40%  {opacity: 0;}
+    100% {opacity: 1;}
+}
