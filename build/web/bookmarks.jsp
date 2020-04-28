@@ -31,7 +31,6 @@
         <button class="myButton" onclick="showBookmarkOptions('bookmark-add')">Add Bookmark</button>
         <button class="myButton" onclick="showBookmarkOptions('bookmark-delete')">Delete Bookmark</button>
         <button class="myButton" onclick="showBookmarkOptions('bookmark-update')">Update Bookmark</button>
-        <a href="/Homepage" class="myButton">Back to Home</a>
 
         <p class="errorMessage">${message}</p>
     </div>
@@ -89,7 +88,6 @@
                 </div>
             </form>
         </div>
-        
     </div>
 </div>
     </div>

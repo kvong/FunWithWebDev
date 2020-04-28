@@ -16,7 +16,6 @@ import javax.servlet.*;
 import java.util.*;
 import javax.servlet.http.*;
 import java.sql.*;
-import javax.servlet.annotation.WebServlet;
 import bookmarks.Bookmark;
 import bookmarks.BookmarkSection;
 import database.BookmarkDB;
