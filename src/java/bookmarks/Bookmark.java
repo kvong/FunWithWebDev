@@ -33,7 +33,7 @@ public class Bookmark implements Serializable{
         this.id = id;
         this.type = type;
         this.name = name;
-        this.url = url;
+        this.url = urlFormatter(url);
         if (icon.equals(""))
             icon = "fas fa-bookmark";
         this.icon = icon;
@@ -43,11 +43,20 @@ public class Bookmark implements Serializable{
     public Bookmark(String type, String name, String url, String icon, String logo){
         this.type = type;
         this.name = name;
-        this.url = url;
+        this.url = urlFormatter(url);
         if (icon.equals(""))
             icon = "fas fa-bookmark";
         this.icon = icon;
         this.logo = logo;
+    }
+    
+    public String urlFormatter(String url){
+        String redirectSyntax = "http://";
+        if (url.substring(0, 4).equals("http")) {
+            return url;
+        }
+        else
+            return redirectSyntax + url;
     }
     
     public int getID(){
@@ -87,7 +96,7 @@ public class Bookmark implements Serializable{
     }
 
     public void setUrl(String url){
-        this.url = url;
+        this.url = urlFormatter(url);
     }
 
     public void setIcon(String icon){

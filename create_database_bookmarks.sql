@@ -12,7 +12,7 @@ USE homepage;
 -- Create a table to store our data
 CREATE TABLE bookmark (
     BookmarkID INT NOT NULL AUTO_INCREMENT,
-    Category VARCHAR(50),
+    Type VARCHAR(50),
     Name VARCHAR(50),
     Url VARCHAR(255),
     Icon VARCHAR(50),
@@ -25,7 +25,7 @@ CREATE TABLE bookmark (
 -- Insert Default bookmark entries
 
 INSERT INTO bookmark
-    (Category, Name, Url, Icon, Logo)
+    (Type, Name, Url, Icon, Logo)
 VALUES
     ('Media', 'Youtube', 'https://www.youtube.com/', 'fab fa-youtube', 'youtube_logo.png'),
     ('Coding', 'GitHub', 'https://github.com', 'fab fa-github', 'github_logo.png'),
@@ -42,7 +42,11 @@ VALUES
     ('School', 'UMSL Email', 'https://login.microsoftonline.com', 'fas fa-mail-bulk', ''),
     ('School', 'Pearson', 'https://pi.pearsoned.com/v1/piapi/piui/signin?client_id=NimtqV7BcT00BM9xOXCQUFJYwF3RzEIk&login_success_url=https:%2F%2Fconsole.pearson.com%2Fconsole%2Fhome', 'fas fa-bookmark', ''),
     ('Coding', 'CodeWar', 'https://www.codewars.com/dashboard', 'fas fa-bookmark', ''),
-    ('School', 'MyView', 'https://myview.umsl.edu/psp/csprds/?cmd=login&languageCd=ENG&', 'fas fa-bookmark', '');
+    ('School', 'MyView', 'https://myview.umsl.edu/psp/csprds/?cmd=login&languageCd=ENG&', 'fas fa-bookmark', ''),
+    ('Media', 'Facebook', 'https://www.facebook.com/', 'fab fa-facebook-square', ''),
+    ('Misc.', 'Font Awesome', 'https://fontawesome.com/', 'fab fa-font-awesome', ''),
+    ('Misc.', 'Router Login', 'http://192.168.1.1', 'fas fa-bookmark', ''),
+    ('Media', 'Bookmark', 'http://youtube.com', 'fas fa-bookmark', '');
 
 -- Create a user to have specific access to library
 DELIMITER //
