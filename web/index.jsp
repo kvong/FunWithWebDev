@@ -15,12 +15,12 @@
                 }, function() { console.log("END"); });
             </script>
 
-            
+            <form class="search-bar" action="https://duckduckgo.com/" >
+                <input autofocus type="search" name="q" placeholder="Search in DuckDuckGo" autocomplete="off">
+            </form>
             <div class="terminal-container"  id="table" style="display: block">
                 <div class="bookmark-container">
-                    <form class="search-bar" action="https://duckduckgo.com/" >
-                        <input autofocus type="search" name="q" placeholder="Search in DuckDuckGo" autocomplete="off">
-                    </form>
+
 
                     <c:forEach items="${sections}" var="section">
                         <div class="bookmark-set">

@@ -104,14 +104,14 @@ input{
 }
 
 .search-bar input {
-    min-width: 500px;
+    min-width: 600px;
     border-radius: 5px;
     color: #FFFFFF;
     background-color: rgb(22, 24, 33, 1);
     font-size: 18px;
     border: 0px solid #161821;
     width: 50%;
-    padding: 10px;
+    padding: 13px;
 }
 
 .terminal-container {
