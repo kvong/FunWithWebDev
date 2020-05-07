@@ -9,7 +9,7 @@ CREATE DATABASE homepage;
 
 USE homepage;
 
--- Create a table to store our data
+-- Create a table to store web bookmarks
 CREATE TABLE bookmark (
     BookmarkID INT NOT NULL AUTO_INCREMENT,
     Type VARCHAR(50),
@@ -21,6 +21,24 @@ CREATE TABLE bookmark (
     PRIMARY KEY(BookmarkID)
 );
 
+-- Create a table to store pdf books
+CREATE TABLE book (
+    BookID INT NOT NULL AUTO_INCREMENT,
+    Cover VARCHAR(255),
+    Title VARCHAR(100),
+    Author VARCHAR(50),
+    Edition VARCHAR(10),
+    PRIMARY KEY(BookID)
+);
+
+-- Create table to store page bookmarks
+CREATE TABLE pagebookmark(
+    BookmarkID INT NOT NULL AUTO_INCREMENT,
+    BookID INT,
+    Page INT,
+    Note VARCHAR(255),
+    FOREIGN KEY(BookID) REFERENCES book(BookID)
+);
 
 -- Insert Default bookmark entries
 

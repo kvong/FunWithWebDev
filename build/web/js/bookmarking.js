@@ -1,10 +1,11 @@
 function showBookmarkOptions(id) {
     if (id !== undefined){
-        background = "options";
-        table = "table";
-        header = "header";
-        otherId0 = "";
-        otherId1 = "";
+        let background = "options";
+        let table = "table";
+        let header = "header";
+        let sbar = "search-bar";
+        let otherId0 = "";
+        let otherId1 = "";
         switch (id){
             case "bookmark-add":
                 otherId0 = "bookmark-delete";
@@ -26,20 +27,27 @@ function showBookmarkOptions(id) {
         var otherOption3 = document.getElementById(background);
         var otherOption4 = document.getElementById(table);
         var otherOption5 = document.getElementById(header);
+        var otherOption6 = document.getElementById(sbar);
 
+        console.log(otherOption6.style.display);
+        // Reappear
         if (selectedOption.style.display === "none") {
             selectedOption.style.display = "block";
             otherOption0.style.display = "none";
             otherOption1.style.display = "none";
             otherOption3.style.display = "block";
+            
+            //
             otherOption4.style.display = "none";
             otherOption5.style.display = "none";
-            
+            otherOption6.style.display = "none";
         } else {
+            
             selectedOption.style.display = "none";
             otherOption3.style.display = "none";
             otherOption4.style.display = "block";
             otherOption5.style.display = "block";
+            otherOption6.style.display = "block";
         }  
  
     }

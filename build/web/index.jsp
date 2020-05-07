@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/includes/header.html"/>
 <script src="js/bookmarking.js"></script>
-        <div class="container">
-            <div class="header"></div>
+        <div class="container" >
+            <div class="header" id="header" style="display: block"></div>
             <script src="./js/typewriting.js"charset="utf-8">
             </script>
             <script charset="utf-8">
@@ -15,9 +15,11 @@
                 }, function() { console.log("END"); });
             </script>
 
-            <form class="search-bar" action="https://duckduckgo.com/" >
-                <input autofocus type="search" name="q" placeholder="Search in DuckDuckGo" autocomplete="off">
-            </form>
+            <div id="search-bar" style="display: block">
+                <form class="search-bar" action="https://duckduckgo.com/">
+                    <input autofocus type="search" placeholder="Search in DuckDuckGo" autocomplete="off">
+                </form>
+            </div>
             <div class="terminal-container"  id="table" style="display: block">
                 <div class="bookmark-container">
 
