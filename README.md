@@ -23,6 +23,7 @@
     - Practice to inserting test entries in the script.
     - Having an ID is important better to have it than not.
     - Use ID as primary key: may not need it but do anyway.
+    - Use attribute from other tables using foreign key.
 - Setting up a connection to the database:
 	- Use `web/META-INF/context.xml` as a reference to form connection.
 		- Database information should be in a <Resource\> tag.
