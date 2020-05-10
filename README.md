@@ -1,4 +1,5 @@
-# FunWithWebDev
+# MyHomePage
+![](./screenshot/screenshot.jpg)
 
 ## Description:
  This is how to guide written from class notes about how to create a dynamic webpage using HTML, CSS, JavaScript, Java Servlets, JSP, JSTL, and MySQL. 
@@ -9,7 +10,7 @@
  [Netbeans IDE 8.2 - Java EE Bundle](https://netbeans.org/downloads/old/8.2/);
  [Typescripter Animation by eddiewentw](https://github.com/eddiewentw/TypeWriting.js);
 
-### Basic Setup:
+### Basic How-to Setup:
 - Add different libraries necessary via Netbeans.
 	- Go to the project panel in Netbeans and locate the `Libraries` folder.
 		1. Right click on the folder and choose `Add Library...`
