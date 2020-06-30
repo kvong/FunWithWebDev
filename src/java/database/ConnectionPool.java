@@ -11,11 +11,21 @@ public class ConnectionPool {
     private static DataSource dataSource = null;
 
     private ConnectionPool() {
+        
         try {
             InitialContext ic = new InitialContext();
-            dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/homepage");
-        } catch (NamingException e) {
-            System.out.println(e);
+            dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/homepage_global");
+        } catch (NamingException e_global) {
+            System.out.println(e_global);
+            System.out.println("Trying local database...");
+            
+            try {
+                InitialContext ic = new InitialContext();
+                dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/homepage_global");
+            }
+            catch (NamingException e_local) {
+                System.out.println(e_global);
+            }
         }
     }
 

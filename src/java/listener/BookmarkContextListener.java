@@ -17,6 +17,7 @@ import static servlets.BookmarkServlet.sortByTypes;
  */
 public class BookmarkContextListener implements ServletContextListener{
     public void contextInitialized(ServletContextEvent event){
+        /* Mark for deletion
         try{
                 Class.forName("com.mysql.jdbc.Driver");
                 
@@ -35,9 +36,9 @@ public class BookmarkContextListener implements ServletContextListener{
             e.printStackTrace();
             System.out.println("SQLException Thrown");
         }
+        */
         
         
-        String url = "";
         ServletContext sc = event.getServletContext();
 
         // Get action
@@ -45,7 +46,6 @@ public class BookmarkContextListener implements ServletContextListener{
 
         String message = "";
 
-            
         ArrayList<BookmarkSection> bookmarkSections;
                     
 

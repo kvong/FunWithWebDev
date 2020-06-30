@@ -25,6 +25,7 @@ import java.util.ArrayList;
 public class BookmarkServlet extends HttpServlet{
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+            /* Mark for deletion
             try{
                 Class.forName("com.mysql.jdbc.Driver");
                 
@@ -43,6 +44,7 @@ public class BookmarkServlet extends HttpServlet{
                 e.printStackTrace();
                 System.out.println("SQLException Thrown");
             }
+            */
         
         
             String url = "";
@@ -256,6 +258,7 @@ public class BookmarkServlet extends HttpServlet{
                 // Set error message
                 session.setAttribute("message", message);
             }
+            
             // Forward to next url
             sc.getRequestDispatcher(url).forward(request, response);
         }

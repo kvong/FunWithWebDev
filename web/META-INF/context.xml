@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/Homepage">
-    <Resource name="jdbc/homepage" auth="Container"
+    <Resource name="jdbc/homepage_global" auth="Container"
         driverClassName="com.mysql.jdbc.Driver" 
-        url="jdbc:mysql://localhost:3306/homepage" 
+        url="jdbc:mysql://192.168.1.110:3306/homepage" 
         username="webmaster" password="gochujang" 
         maxActive="100" maxIdle="30" maxWait="10000" 
         logAbandoned="true" removeAbandoned="true" 
-        removeAbandonedTimeout="60" type="javax.sql.DataSource" />
+        removeAbandonedTimeout="60" type="javax.sql.DataSource"/>
+    <Resource name="jdbc/homepage_local" auth="Container"
+        driverClassName="com.mysql.jdbc.Driver" 
+        url="jdbc:mysql://192.168.1.110:3306/homepage" 
+        username="webmaster" password="gochujang" 
+        maxActive="100" maxIdle="30" maxWait="10000" 
+        logAbandoned="true" removeAbandoned="true" 
+        removeAbandonedTimeout="60" type="javax.sql.DataSource"/>
  </Context>

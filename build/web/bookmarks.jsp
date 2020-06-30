@@ -3,16 +3,21 @@
 <script src="js/bookmarking.js"></script>
 <div class="container">
     <div class="header" id="header" style="display: block"></div>
-        <script src="./js/typewriting.js"charset="utf-8"></script>
-        <script charset="utf-8">
-            var typeWriting = new TypeWriting({
-            targetElement   : document.getElementsByClassName('header')[0],
-            inputString     : '> Bookmarks',
-            typing_interval : 130, // Interval between each character
-            blink_interval  : '1s', // Interval of the cursor blinks
-            cursor_color    : '#00fd55', // Color of the cursor
-            }, function() { console.log("END"); });
-        </script>
+    <script src="./js/typewriting.js"charset="utf-8"></script>
+    <script charset="utf-8">
+        var typeWriting = new TypeWriting({
+        targetElement   : document.getElementsByClassName('header')[0],
+        inputString     : '> Bookmarks',
+        typing_interval : 130, // Interval between each character
+        blink_interval  : '1s', // Interval of the cursor blinks
+        cursor_color    : '#00fd55', // Color of the cursor
+        }, function() { console.log("END"); });
+    </script>
+    <div id="search-bar" style="display: block">
+        <form class="search-bar" action="https://duckduckgo.com/">
+            <input autofocus type="search" placeholder="Search in DuckDuckGo" autocomplete="off">
+        </form>
+    </div>
     <div class="terminal-container"  id="table" style="display: block">
         <div class="bookmark-container">
 
