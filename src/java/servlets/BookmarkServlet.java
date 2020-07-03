@@ -25,27 +25,6 @@ import java.util.ArrayList;
 public class BookmarkServlet extends HttpServlet{
 
     protected void doPost( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-            /* Mark for deletion
-            try{
-                Class.forName("com.mysql.jdbc.Driver");
-                
-                String dbURL = "jdbc:mysql://localhost:3306/homepage";
-                String username = "webmaster";
-                String password = "gochujang";
-                Connection connection = DriverManager.getConnection(
-                        dbURL, username, password);
-                     
-            }
-            catch (ClassNotFoundException e){
-                e.printStackTrace();
-                System.out.println("ClassNotFoundException Thrown");
-            }
-            catch (SQLException e){
-                e.printStackTrace();
-                System.out.println("SQLException Thrown");
-            }
-            */
-        
         
             String url = "";
             ServletContext sc = getServletContext();
@@ -75,7 +54,7 @@ public class BookmarkServlet extends HttpServlet{
                     // If session attribute has not been set yet,
                     // then create a new object by grabbing info from database
                     if (bookmarkSections == null) {
-                        ArrayList<Bookmark> bookmarks = BookmarkDB.getBookmarks();
+                        ArrayList<Bookmark> bookmarks = BookmarkDB.getBookmarks(1);
                         BookmarkSection bookmarkSection = new BookmarkSection();
                         bookmarkSections = bookmarkSection.createSections(bookmarks);
 
@@ -107,7 +86,7 @@ public class BookmarkServlet extends HttpServlet{
                         bookmarkIcon, bookmarkLogo);
                     
                     // Check if the this bookmark has already been created
-                    if (BookmarkDB.bookmarkExist(bookmark.getName())){
+                    if (BookmarkDB.bookmarkExist(bookmark.getName(), 1)){
                         // Print error message and break out of switch statement
                         message = "Bookmark named '" + bookmark.getName() +
                                  "' already exists.";
@@ -116,18 +95,16 @@ public class BookmarkServlet extends HttpServlet{
                     
                     // If the new bookmark does not exist in the database,
                     // insert it as a new entry
-                    BookmarkDB.insert(bookmark);
+                    BookmarkDB.insert(bookmark, 1);
                     
                     // Get the updated database list
-                    ArrayList<Bookmark> bookmarks = BookmarkDB.getBookmarks();
+                    ArrayList<Bookmark> bookmarks = BookmarkDB.getBookmarks(1);
                     
                     // Separate the different bookmarks into sections by
                     // their Types
                     BookmarkSection bookmarkSection = new BookmarkSection();
                     ArrayList<BookmarkSection> bookmarkSections = bookmarkSection.createSections(bookmarks);
                     bookmarkSections = sortByTypes(bookmarkSections);
-                    
-                    System.out.println(bookmarkSections.get(0).getType());
                     
                     // All session will synchronize lock to make thread-safe
                     synchronized(lock){
@@ -151,7 +128,7 @@ public class BookmarkServlet extends HttpServlet{
                     bookmark.setName(bookmarkName);
                     
                     // Check if there is a bookmark to delete
-                    if (!BookmarkDB.bookmarkExist(bookmark.getName())){
+                    if (!BookmarkDB.bookmarkExist(bookmark.getName(), 1)){
                         // Print error message and break out of switch statement
                         message = "Bookmark named '" + bookmark.getName() +
                                  "' does not exists.";
@@ -160,10 +137,10 @@ public class BookmarkServlet extends HttpServlet{
                     
                     // Delete the bookmark from the database using our database
                     // connection
-                    BookmarkDB.delete(bookmark);
+                    BookmarkDB.delete(bookmark, 1);
                     
                     // Get the updated database list
-                    ArrayList<Bookmark> bookmarks = BookmarkDB.getBookmarks();
+                    ArrayList<Bookmark> bookmarks = BookmarkDB.getBookmarks(1);
                     
                     // Separate the different bookmarks into sections by
                     // their Types
@@ -193,7 +170,7 @@ public class BookmarkServlet extends HttpServlet{
 
                     
                     // Check if there is a bookmark to delete
-                    if (!BookmarkDB.bookmarkExist(bookmarkName)){
+                    if (!BookmarkDB.bookmarkExist(bookmarkName, 1)){
                         // Print error message and break out of switch statement
                         message = "Bookmark named '" + bookmarkName +
                                  "' does not exists.";
@@ -204,7 +181,7 @@ public class BookmarkServlet extends HttpServlet{
                     Bookmark newBookmark = new Bookmark();
                     
                     // Grab old bookmark for updating
-                    Bookmark oldBookmark = BookmarkDB.getBookmark(bookmarkName);
+                    Bookmark oldBookmark = BookmarkDB.getBookmark(bookmarkName, 1);
                     // Do not update empty inputs
                     
                     // Updating type
@@ -234,10 +211,10 @@ public class BookmarkServlet extends HttpServlet{
                         newBookmark.setLogo(bookmarkLogo);
                     
                     // Updating database
-                    BookmarkDB.update(bookmarkName, newBookmark);
+                    BookmarkDB.update(bookmarkName, newBookmark, 1);
                     
                     // Get the updated database list
-                    ArrayList<Bookmark> bookmarks = BookmarkDB.getBookmarks();
+                    ArrayList<Bookmark> bookmarks = BookmarkDB.getBookmarks(1);
                     
                     // Separate the different bookmarks into sections by
                     // their Types

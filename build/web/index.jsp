@@ -22,17 +22,17 @@
             </div>
             <div class="terminal-container"  id="table" style="display: block">
                 <div class="bookmark-container">
-
-
                     <c:forEach items="${sections}" var="section">
-                        <div class="bookmark-set">
-                            <div class="bookmark-title">${section.type}</div>
-                            <div class="bookmark-inner-container">
-                            <c:forEach items="${section.bookmarks}" var="bookmark">
-                                <div class="bookmark"><a href="${bookmark.url}"><i class="${bookmark.icon}"></i> ${bookmark.name}</a></div>
-                            </c:forEach>
-                            </div>
-                        </div>
+                        <c:if test="${section.type != 'Update'}">
+                            <div class="bookmark-set">
+                                <div class="bookmark-title">${section.type}</div>
+                                <div class="bookmark-inner-container">
+                                <c:forEach items="${section.bookmarks}" var="bookmark">
+                                    <div class="bookmark"><a href="${bookmark.url}"><i class="${bookmark.icon}"></i> ${bookmark.name}</a></div>
+                                </c:forEach>
+                                </div>
+                            </div>  
+                        </c:if>
                     </c:forEach>
                 </div>
                 <button class="myButton" onclick="showBookmarkOptions('bookmark-add')">Add Bookmark</button>

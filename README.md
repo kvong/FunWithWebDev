@@ -63,4 +63,4 @@
 	- Run start script from `apache-tomcat-8.0.27/bin/startup.sh`
 
 - Additional resources:
-    - ![Enable Remote access to MariaDB/MySQL](https://webdock.io/en/docs/how-guides/how-enable-remote-access-your-mariadbmysql-database)
+    - [Enable Remote access to MariaDB/MySQL](https://webdock.io/en/docs/how-guides/how-enable-remote-access-your-mariadbmysql-database)

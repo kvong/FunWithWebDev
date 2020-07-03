@@ -8,20 +8,21 @@ package database;
 import bookmarks.Bookmark;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author blank
  */
 public class BookmarkDB {
-    public static int insert(Bookmark bookmark){
+    public static int insert(Bookmark bookmark, int source){
         ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
+        Connection connection = pool.getConnection(source);
         PreparedStatement ps = null;
         
         String query = 
-                "INSERT INTO bookmark (Type, Name, Url, Icon, Logo)"
-                + "VALUES (?,?,?,?,?)";
+                "INSERT INTO bookmark (Type, Name, Url, Icon, Logo, Display)"
+                + "VALUES (?,?,?,?,?,?)";
         
         try{
             ps = connection.prepareStatement(query);
@@ -30,6 +31,7 @@ public class BookmarkDB {
             ps.setString(3, bookmark.getUrl());
             ps.setString(4, bookmark.getIcon());
             ps.setString(5, bookmark.getLogo());
+            ps.setString(6, bookmark.getDisplay() ? "1" : "0");
             return ps.executeUpdate();
         }
         catch (SQLException e){
@@ -42,9 +44,43 @@ public class BookmarkDB {
         }
     }
     
-    public static int update(String bookmarkName, Bookmark bookmark){
+    public static int insertBulk(ArrayList <Bookmark> bookmarks, int source){
         ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
+        Connection connection = pool.getConnection(source);
+        PreparedStatement ps = null;
+        int result = 0;
+        
+        String query = 
+                "INSERT INTO bookmark (Type, Name, Url, Icon, Logo, Display)"
+                + "VALUES (?,?,?,?,?,?)";
+        
+        try{
+            for (Bookmark bookmark : bookmarks){
+                ps = connection.prepareStatement(query);
+                ps.setString(1, bookmark.getType());
+                ps.setString(2, bookmark.getName());
+                ps.setString(3, bookmark.getUrl());
+                ps.setString(4, bookmark.getIcon());
+                ps.setString(5, bookmark.getLogo());
+                ps.setString(6, bookmark.getDisplay() ? "1" : "0");
+                
+                result = ps.executeUpdate();
+            }
+            return result;
+        }
+        catch (SQLException e){
+            System.out.println(e);
+            return 0;
+        }
+        finally{
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
+    public static int update(String bookmarkName, Bookmark bookmark, int source){
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection(source);
         PreparedStatement ps = null;
         
         String query =
@@ -76,9 +112,9 @@ public class BookmarkDB {
         }
     }
     
-    public static int delete(Bookmark bookmark){
+    public static int delete(Bookmark bookmark, int source){
         ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
+        Connection connection = pool.getConnection(source);
         PreparedStatement ps = null;
         
         String query = "DELETE FROM bookmark " +
@@ -99,9 +135,30 @@ public class BookmarkDB {
         }
     }
     
-    public static boolean bookmarkExist(String name){
+    public static int deleteAll(int source){
         ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
+        Connection connection = pool.getConnection(source);
+        PreparedStatement ps = null;
+        
+        String query = "DELETE FROM bookmark";
+        
+        try{
+            ps = connection.prepareStatement(query);
+            return ps.executeUpdate();
+        }
+        catch (SQLException e){
+            System.out.println(e);
+            return 0;
+        }
+        finally{
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
+    public static boolean bookmarkExist(String name, int source){
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection(source);
         PreparedStatement ps = null;
         ResultSet rs = null;
         
@@ -125,9 +182,9 @@ public class BookmarkDB {
         }
     }
     
-    public static Bookmark getBookmark(String Name){
+    public static Bookmark getBookmark(String Name, int source){
         ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
+        Connection connection = pool.getConnection(source);
         PreparedStatement ps = null;
         ResultSet rs = null;
         
@@ -160,9 +217,9 @@ public class BookmarkDB {
         }
     }
     
-    public static ArrayList<Bookmark> getBookmarks(){
+    public static ArrayList<Bookmark> getBookmarks(int source){
         ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
+        Connection connection = pool.getConnection(source);
         Statement s = null;
         ResultSet rs = null;
         
@@ -183,10 +240,19 @@ public class BookmarkDB {
                 String Icon = rs.getString(5);
                 String Logo = rs.getString(6);
                 
+                Boolean Display;
+                try {
+                    Display = rs.getString(7).equals("1") ? true : false;
+                }
+                catch (Exception e){
+                    Display = true;
+                }
+                
+                
                 // Must use setters; Argumented constructor will not work
-                Bookmark bookmark = new Bookmark(BookmarkID, Type, Name, URL, Icon, Logo);                
-
-                bookmarks.add(bookmark);
+                Bookmark bookmark = new Bookmark(BookmarkID, Type, Name, URL,
+                        Icon, Logo, Display);                
+                bookmarks.add(bookmark);   
             }
             return bookmarks;
         }
@@ -199,5 +265,39 @@ public class BookmarkDB {
             DBUtil.closeStatement(s);
             pool.freeConnection(connection);
         }  
+    }
+    
+    public static void syncDB(String action){
+        // Check global database
+        ArrayList<Bookmark> globalBookmarks = getBookmarks(2); 
+        
+        if (globalBookmarks != null){
+            ArrayList<Bookmark> localBookmarks = getBookmarks(1);
+            
+            HashMap <String, Bookmark> allBookmarks = new HashMap<String, Bookmark>();
+            for(Bookmark bookmark : localBookmarks){
+                allBookmarks.put(bookmark.getName(), bookmark);
+            }
+            for (Bookmark bookmark : globalBookmarks){
+                allBookmarks.put(bookmark.getName(), bookmark);      
+            }
+            
+            // Update local and global
+            for (String key : allBookmarks.keySet()){
+                if (!BookmarkDB.bookmarkExist(key, 1)){
+                    BookmarkDB.insert(allBookmarks.get(key), 1);
+                    System.out.println("Add to local");
+                }
+                System.out.println(key);
+                
+                if (!BookmarkDB.bookmarkExist(key, 2)){
+                    BookmarkDB.insert(allBookmarks.get(key), 2);
+                    System.out.println("Add to global");
+                }
+            }
+        }    
+        else{
+            System.out.println("Global database not available");
+        }
     }
 }

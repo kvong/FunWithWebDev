@@ -17,54 +17,35 @@ CREATE TABLE bookmark (
     Url VARCHAR(255),
     Icon VARCHAR(50),
     Logo VARCHAR(50),
+    Display BOOLEAN,
 
     PRIMARY KEY(BookmarkID)
-);
-
--- Create a table to store pdf books
-CREATE TABLE book (
-    BookID INT NOT NULL AUTO_INCREMENT,
-    Cover VARCHAR(255),
-    Title VARCHAR(100),
-    Author VARCHAR(50),
-    Edition VARCHAR(10),
-    PRIMARY KEY(BookID)
-);
-
--- Create table to store page bookmarks
-CREATE TABLE pagebookmark(
-    BookmarkID INT NOT NULL AUTO_INCREMENT,
-    BookID INT,
-    Page INT,
-    Note VARCHAR(255),
-    FOREIGN KEY(BookID) REFERENCES book(BookID)
 );
 
 -- Insert Default bookmark entries
 
 INSERT INTO bookmark
-    (Type, Name, Url, Icon, Logo)
+    (Type, Name, Url, Icon, Logo, Display)
 VALUES
-    ('Media', 'Youtube', 'https://www.youtube.com/', 'fab fa-youtube', 'youtube_logo.png'),
-    ('Coding', 'GitHub', 'https://github.com', 'fab fa-github', 'github_logo.png'),
-    ('Shopping', 'Amazon', 'https://www.amazon.com', 'fab fa-amazon', 'amazon_logo.png'),
-    ('Google', 'Google Drive', 'https://drive.google.com/drive/my-drive', 'fab fa-google-drive', 'google_logo.png'),
-    ('Coding', 'GitHub Guide', 'https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/', 'fas fa-bookmark', ''),
-    ('Coding', 'StackEdit', 'https://stackedit.io/app#', 'fas fa-bookmark', ''),
-    ('Media', 'Read Manga', 'https://manganelo.com/bookmark', 'fas fa-bookmark', ''),
-    ('Google', 'Gmail', 'https://mail.google.com/mail/u/0/#inbox', 'fas fa-envelope', ''),
-    ('Google', 'Google Colab', 'https://colab.research.google.com/notebooks/intro.ipynb#recent=true', 'fas fa-infinity', ''),
-    ('Shopping', 'Ebay', 'https://www.ebay.com/', 'fas fa-shopping-cart', ''),
-    ('School', 'Canvas', 'https://umsl.instructure.com/', 'fas fa-chalkboard-teacher', ''),
-    ('School', 'Deep Learning', 'https://github.com/badriadhikari/DL-2020spring', 'fas fa-brain', ''),
-    ('School', 'UMSL Email', 'https://login.microsoftonline.com', 'fas fa-mail-bulk', ''),
-    ('School', 'Pearson', 'https://pi.pearsoned.com/v1/piapi/piui/signin?client_id=NimtqV7BcT00BM9xOXCQUFJYwF3RzEIk&login_success_url=https:%2F%2Fconsole.pearson.com%2Fconsole%2Fhome', 'fas fa-bookmark', ''),
-    ('Coding', 'CodeWar', 'https://www.codewars.com/dashboard', 'fas fa-bookmark', ''),
-    ('School', 'MyView', 'https://myview.umsl.edu/psp/csprds/?cmd=login&languageCd=ENG&', 'fas fa-bookmark', ''),
-    ('Media', 'Facebook', 'https://www.facebook.com/', 'fab fa-facebook-square', ''),
-    ('Misc.', 'Font Awesome', 'https://fontawesome.com/', 'fab fa-font-awesome', ''),
-    ('Misc.', 'Router Login', 'http://192.168.1.1', 'fas fa-bookmark', ''),
-    ('Media', 'Bookmark', 'http://youtube.com', 'fas fa-bookmark', '');
+    ('Update', '0', '', '', '', FALSE),
+    ('Media', 'Youtube', 'https://www.youtube.com/', 'fab fa-youtube', 'youtube_logo.png', TRUE),
+    ('Coding', 'GitHub', 'https://github.com', 'fab fa-github', 'github_logo.png', TRUE),
+    ('Shopping', 'Amazon', 'https://www.amazon.com', 'fab fa-amazon', 'amazon_logo.png', TRUE),
+    ('Google', 'Google Drive', 'https://drive.google.com/drive/my-drive', 'fab fa-google-drive', 'google_logo.png', TRUE),
+    ('Coding', 'GitHub Guide', 'https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/', 'fas fa-bookmark', '', TRUE),
+    ('Coding', 'StackEdit', 'https://stackedit.io/app#', 'fas fa-bookmark', '', TRUE),
+    ('Media', 'Read Manga', 'https://manganelo.com/bookmark', 'fas fa-bookmark', '', TRUE),
+    ('Google', 'Gmail', 'https://mail.google.com/mail/u/0/#inbox', 'fas fa-envelope', '', TRUE),
+    ('Google', 'Google Colab', 'https://colab.research.google.com/notebooks/intro.ipynb#recent=true', 'fas fa-infinity', '', TRUE),
+    ('Shopping', 'Ebay', 'https://www.ebay.com/', 'fas fa-shopping-cart', '', TRUE),
+    ('School', 'Canvas', 'https://umsl.instructure.com/', 'fas fa-chalkboard-teacher', '', TRUE),
+    ('School', 'UMSL Email', 'https://login.microsoftonline.com', 'fas fa-mail-bulk', '', TRUE),
+    ('Coding', 'CodeWar', 'https://www.codewars.com/dashboard', 'fas fa-bookmark', '', TRUE),
+    ('School', 'MyView', 'https://myview.umsl.edu/psp/csprds/?cmd=login&languageCd=ENG&', 'fas fa-bookmark', '', TRUE),
+    ('Misc.', 'Font Awesome', 'https://fontawesome.com/', 'fab fa-font-awesome', '', TRUE),
+    ('Misc.', 'Router Login', 'http://192.168.1.1', 'fas fa-bookmark', '', TRUE),
+    ('Misc.', 'PDF Download Sites', 'https://www.easepdf.com/topics/sites-like-library-genesis-pdf-ebooks.html', 'fas fa-bookmark', '', TRUE),
+    ('Coding', 'LeetCode', 'https://leetcode.com/', 'fas fa-bookmark', '', TRUE);
 
 -- Create a user to have specific access to library
 DELIMITER //

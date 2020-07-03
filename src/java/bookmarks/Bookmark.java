@@ -19,6 +19,7 @@ public class Bookmark implements Serializable{
     private String url;
     private String icon;
     private String logo;
+    private Boolean display;
 
     public Bookmark(){
         this.id = -1;
@@ -27,9 +28,11 @@ public class Bookmark implements Serializable{
         this.url = "";
         this.icon = "fas fa-bookmark";
         this.logo = "";
+        this.display = true;
     }
 
-    public Bookmark(int id, String type, String name, String url, String icon, String logo){
+    public Bookmark(int id, String type, String name, String url, String icon,
+            String logo, Boolean display){
         this.id = id;
         this.type = type;
         this.name = name;
@@ -38,6 +41,7 @@ public class Bookmark implements Serializable{
             icon = "fas fa-bookmark";
         this.icon = icon;
         this.logo = logo;
+        this.display = display;
     }
     
     public Bookmark(String type, String name, String url, String icon, String logo){
@@ -48,15 +52,22 @@ public class Bookmark implements Serializable{
             icon = "fas fa-bookmark";
         this.icon = icon;
         this.logo = logo;
+        this.display = true;
     }
     
     public String urlFormatter(String url){
         String redirectSyntax = "http://";
-        if (url.substring(0, 4).equals("http")) {
-            return url;
+        try{
+            if (url.substring(0, 4).equals("http")) {
+                return url;
+            }
+            else
+                return redirectSyntax + url;
         }
-        else
-            return redirectSyntax + url;
+        catch (StringIndexOutOfBoundsException e){
+            return "";
+        }
+        
     }
     
     public int getID(){
@@ -83,6 +94,10 @@ public class Bookmark implements Serializable{
         return logo;
     }
     
+    public Boolean getDisplay(){
+        return display;
+    }
+    
     public void setID(int id){
         this.id = id;
     }
@@ -105,6 +120,10 @@ public class Bookmark implements Serializable{
     
     public void setLogo(String logo){
         this.logo = logo;
+    }
+    
+    public void setDisplay(Boolean display){
+        this.display = display;
     }
 }
 

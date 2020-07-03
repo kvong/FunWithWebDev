@@ -17,27 +17,6 @@ import static servlets.BookmarkServlet.sortByTypes;
  */
 public class BookmarkContextListener implements ServletContextListener{
     public void contextInitialized(ServletContextEvent event){
-        /* Mark for deletion
-        try{
-                Class.forName("com.mysql.jdbc.Driver");
-                
-                String dbURL = "jdbc:mysql://localhost:3306/homepage";
-                String username = "webmaster";
-                String password = "gochujang";
-                Connection connection = DriverManager.getConnection(
-                        dbURL, username, password);
-                     
-            }
-        catch (ClassNotFoundException e){
-            e.printStackTrace();
-            System.out.println("ClassNotFoundException Thrown");
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-            System.out.println("SQLException Thrown");
-        }
-        */
-        
         
         ServletContext sc = event.getServletContext();
 
@@ -46,16 +25,51 @@ public class BookmarkContextListener implements ServletContextListener{
 
         String message = "";
 
-        ArrayList<BookmarkSection> bookmarkSections;
-                    
-
-        ArrayList<Bookmark> bookmarks = BookmarkDB.getBookmarks();
+        ArrayList<Bookmark> globalBookmarks = BookmarkDB.getBookmarks(2);
+        ArrayList<Bookmark> localBookmarks = BookmarkDB.getBookmarks(1);
+        
+        ArrayList<Bookmark> bookmarks = globalBookmarks;
+        
+        int globalUpdateNumber = -1;
+        int localUpdateNumber = -2;
+        
+        System.out.println(globalBookmarks);
+        if ( bookmarks == null || bookmarks.size() == 0){
+            bookmarks = localBookmarks;
+        }
+        else{
+            // Update local with global if needed
+            globalUpdateNumber = Integer.parseInt(globalBookmarks.get(0).getName());
+            localUpdateNumber = Integer.parseInt(localBookmarks.get(0).getName());
+            
+            if (globalUpdateNumber > localUpdateNumber){
+                System.out.println("Updating local");
+                BookmarkDB.deleteAll(1);
+                localBookmarks.get(0).setName(String.valueOf(globalUpdateNumber++));
+                globalBookmarks.get(0).setName(String.valueOf(globalUpdateNumber));
+                BookmarkDB.insertBulk(globalBookmarks, 1);
+                bookmarks = globalBookmarks;
+            }
+            else if (localUpdateNumber > globalUpdateNumber){
+                System.out.println("Updating global");
+                BookmarkDB.deleteAll(2);
+                globalBookmarks.get(0).setName(String.valueOf(localUpdateNumber++));
+                localBookmarks.get(0).setName(String.valueOf(localUpdateNumber));
+                BookmarkDB.insertBulk(localBookmarks, 2);
+                bookmarks = localBookmarks;
+            }
+        }
+        
+        
         BookmarkSection bookmarkSection = new BookmarkSection();
-        bookmarkSections = bookmarkSection.createSections(bookmarks);
-        printAll(bookmarks);
+        ArrayList<BookmarkSection> bookmarkSections = bookmarkSection.createSections(bookmarks);
+        
+        //printAll(bookmarks);
         sc.setAttribute("sections", sortByTypes(bookmarkSections));
-
+        
+        //BookmarkDB.syncDB("view");
     }
+    
     public void contextDestroyed(ServletContextEvent event){
         // Do clean up
     }
