@@ -13,7 +13,6 @@ package bookmarks;
 import java.io.Serializable;
 
 public class Bookmark implements Serializable{
-    private int id;
     private String type;
     private String name;
     private String url;
@@ -22,7 +21,6 @@ public class Bookmark implements Serializable{
     private Boolean display;
 
     public Bookmark(){
-        this.id = -1;
         this.type = "";
         this.name = "";
         this.url = "";
@@ -31,9 +29,8 @@ public class Bookmark implements Serializable{
         this.display = true;
     }
 
-    public Bookmark(int id, String type, String name, String url, String icon,
+    public Bookmark(String type, String name, String url, String icon,
             String logo, Boolean display){
-        this.id = id;
         this.type = type;
         this.name = name;
         this.url = urlFormatter(url);
@@ -70,10 +67,6 @@ public class Bookmark implements Serializable{
         
     }
     
-    public int getID(){
-        return id;
-    }
-    
     public String getType(){
         return type;
     }
@@ -98,10 +91,6 @@ public class Bookmark implements Serializable{
         return display;
     }
     
-    public void setID(int id){
-        this.id = id;
-    }
-
     public void setType(String type){
         this.type = type;
     }

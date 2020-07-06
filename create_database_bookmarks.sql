@@ -11,19 +11,15 @@ USE homepage;
 
 -- Create a table to store web bookmarks
 CREATE TABLE bookmark (
-    BookmarkID INT NOT NULL AUTO_INCREMENT,
     Type VARCHAR(50),
     Name VARCHAR(50),
     Url VARCHAR(255),
     Icon VARCHAR(50),
     Logo VARCHAR(50),
-    Display BOOLEAN,
-
-    PRIMARY KEY(BookmarkID)
+    Display BOOLEAN
 );
 
 -- Insert Default bookmark entries
-
 INSERT INTO bookmark
     (Type, Name, Url, Icon, Logo, Display)
 VALUES

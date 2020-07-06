@@ -54,12 +54,47 @@ public class BookmarkServlet extends HttpServlet{
                     // If session attribute has not been set yet,
                     // then create a new object by grabbing info from database
                     if (bookmarkSections == null) {
-                        ArrayList<Bookmark> bookmarks = BookmarkDB.getBookmarks(1);
+                        ArrayList<Bookmark> globalBookmarks = BookmarkDB.getBookmarks(2);
+                        ArrayList<Bookmark> localBookmarks = BookmarkDB.getBookmarks(1);
                         BookmarkSection bookmarkSection = new BookmarkSection();
-                        bookmarkSections = bookmarkSection.createSections(bookmarks);
+                        
+                        ArrayList<Bookmark> bookmarks = globalBookmarks;
+                        
+                        int globalUpdateNumber = -1;
+                        int localUpdateNumber = -2;
+                        
+                        if (bookmarks == null || bookmarks.size() == 0){
+                            bookmarks = localBookmarks;
+                        }
+                        else{
+                            // Update local with global if needed
+                            globalUpdateNumber = Integer.parseInt(globalBookmarks.get(0).getName());
+                            localUpdateNumber = Integer.parseInt(localBookmarks.get(0).getName());
 
+                            // Determine whether local or global is ahead
+                            if (globalUpdateNumber > localUpdateNumber){
+                                // Updating local
+                                BookmarkDB.deleteAll(1);
+                                localBookmarks.get(0).setName(String.valueOf(globalUpdateNumber++));
+                                globalBookmarks.get(0).setName(String.valueOf(globalUpdateNumber));
+                                BookmarkDB.insertBulk(globalBookmarks, 1);
+                                bookmarks = globalBookmarks;
+                            }
+                            else if (localUpdateNumber > globalUpdateNumber){
+                                // Updating global
+                                BookmarkDB.deleteAll(2);
+                                globalBookmarks.get(0).setName(String.valueOf(localUpdateNumber++));
+                                localBookmarks.get(0).setName(String.valueOf(localUpdateNumber));
+                                BookmarkDB.insertBulk(localBookmarks, 2);
+                                bookmarks = localBookmarks;
+                            }
+                            else
+                                bookmarks = localBookmarks;
+                        }
+                        
+                        bookmarkSections = bookmarkSection.createSections(bookmarks);
+                        
                     }
-                    //printAll(bookmarks);
                     
                     // All session will synchronize lock to make thread-safe
                     synchronized(lock){
@@ -189,21 +224,25 @@ public class BookmarkServlet extends HttpServlet{
                         newBookmark.setType(oldBookmark.getType());
                     else
                         newBookmark.setType(bookmarkType);
+                    
                     // Updating name
                     if (bookmarkNewName.equals(""))
                         newBookmark.setName(oldBookmark.getName());
                     else
                         newBookmark.setName(bookmarkNewName);
+                    
                     // Updating url
                     if (bookmarkUrl.equals(""))
                         newBookmark.setUrl(oldBookmark.getUrl());
                     else
                         newBookmark.setUrl(bookmarkUrl);
+                    
                     // Updating icon
                     if (bookmarkIcon.equals(""))
                         newBookmark.setIcon(oldBookmark.getIcon());
                     else
                         newBookmark.setIcon(bookmarkIcon);
+                    
                     // Updating logo
                     if (bookmarkLogo.equals(""))
                         newBookmark.setLogo(oldBookmark.getLogo());

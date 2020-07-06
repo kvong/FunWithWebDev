@@ -199,7 +199,6 @@ public class BookmarkDB {
             Bookmark bookmark = null;
             if (rs.next()){
                 bookmark = new Bookmark();
-                bookmark.setID(Integer.parseInt(rs.getString("BookmarkID")));
                 bookmark.setType(rs.getString("Type"));
                 bookmark.setName(rs.getString("Name"));
                 bookmark.setUrl(rs.getString("Url"));
@@ -227,34 +226,35 @@ public class BookmarkDB {
         String query = "SELECT * FROM bookmark ";
         
         try{
-            s = connection.createStatement();
-            rs = s.executeQuery(query);
-            
-            bookmarks = new ArrayList<Bookmark>();
-            
-            while(rs.next()){
-                int BookmarkID = Integer.parseInt(rs.getString(1));
-                String Type = rs.getString(2);
-                String Name = rs.getString(3);
-                String URL = rs.getString(4);
-                String Icon = rs.getString(5);
-                String Logo = rs.getString(6);
-                
-                Boolean Display;
-                try {
-                    Display = rs.getString(7).equals("1") ? true : false;
+            if (connection != null){
+                s = connection.createStatement();
+                rs = s.executeQuery(query);
+
+                bookmarks = new ArrayList<Bookmark>();
+
+                while(rs.next()){
+                    String Type = rs.getString(1);
+                    String Name = rs.getString(2);
+                    String URL = rs.getString(3);
+                    String Icon = rs.getString(4);
+                    String Logo = rs.getString(5);
+
+                    Boolean Display;
+                    try {
+                        Display = rs.getString(6).equals("1") ? true : false;
+                    }
+                    catch (Exception e){
+                        Display = true;
+                    }
+
+                    // Must use setters; Argumented constructor will not work
+                    Bookmark bookmark = new Bookmark(Type, Name, URL,
+                            Icon, Logo, Display);                
+                    bookmarks.add(bookmark);   
                 }
-                catch (Exception e){
-                    Display = true;
-                }
-                
-                
-                // Must use setters; Argumented constructor will not work
-                Bookmark bookmark = new Bookmark(BookmarkID, Type, Name, URL,
-                        Icon, Logo, Display);                
-                bookmarks.add(bookmark);   
+                return bookmarks;
             }
-            return bookmarks;
+            return null;
         }
         catch (SQLException e){
             System.out.println(e);

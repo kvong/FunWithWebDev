@@ -50,7 +50,9 @@ public class ConnectionPool {
 
     public void freeConnection(Connection c) {
         try {
-            c.close();
+            if (c != null){
+                c.close();
+            }
         } catch (SQLException e) {
             System.out.println(e);
         }

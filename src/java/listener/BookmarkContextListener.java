@@ -33,7 +33,6 @@ public class BookmarkContextListener implements ServletContextListener{
         int globalUpdateNumber = -1;
         int localUpdateNumber = -2;
         
-        System.out.println(globalBookmarks);
         if ( bookmarks == null || bookmarks.size() == 0){
             bookmarks = localBookmarks;
         }
@@ -42,8 +41,9 @@ public class BookmarkContextListener implements ServletContextListener{
             globalUpdateNumber = Integer.parseInt(globalBookmarks.get(0).getName());
             localUpdateNumber = Integer.parseInt(localBookmarks.get(0).getName());
             
+            // Determine whether local or global is ahead
             if (globalUpdateNumber > localUpdateNumber){
-                System.out.println("Updating local");
+                // Updating local
                 BookmarkDB.deleteAll(1);
                 localBookmarks.get(0).setName(String.valueOf(globalUpdateNumber++));
                 globalBookmarks.get(0).setName(String.valueOf(globalUpdateNumber));
@@ -51,15 +51,16 @@ public class BookmarkContextListener implements ServletContextListener{
                 bookmarks = globalBookmarks;
             }
             else if (localUpdateNumber > globalUpdateNumber){
-                System.out.println("Updating global");
+                // Updating global
                 BookmarkDB.deleteAll(2);
                 globalBookmarks.get(0).setName(String.valueOf(localUpdateNumber++));
                 localBookmarks.get(0).setName(String.valueOf(localUpdateNumber));
                 BookmarkDB.insertBulk(localBookmarks, 2);
                 bookmarks = localBookmarks;
             }
+            else
+                bookmarks = localBookmarks;
         }
-        
         
         BookmarkSection bookmarkSection = new BookmarkSection();
         ArrayList<BookmarkSection> bookmarkSections = bookmarkSection.createSections(bookmarks);
