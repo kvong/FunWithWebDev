@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/Homepage">
+<Context path="/Homepage" reloadable="true">
     <Resource name="jdbc/homepage_global" auth="Container"
         driverClassName="com.mysql.jdbc.Driver" 
         url="jdbc:mysql://192.168.1.110:3306/homepage" 
@@ -15,4 +15,6 @@
         maxActive="100" maxIdle="30" maxWait="10000" 
         logAbandoned="true" removeAbandoned="true" 
         removeAbandonedTimeout="60" type="javax.sql.DataSource"/>
- </Context>
+
+
+</Context>

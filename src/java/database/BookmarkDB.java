@@ -182,7 +182,7 @@ public class BookmarkDB {
         }
     }
     
-    public static Bookmark getBookmark(String Name, int source){
+    public static Bookmark getBookmarkByName(String Name, int source){
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection(source);
         PreparedStatement ps = null;
@@ -194,6 +194,39 @@ public class BookmarkDB {
         try{
             ps = connection.prepareStatement(query);
             ps.setString(1, Name);
+            rs = ps.executeQuery();
+            
+            Bookmark bookmark = null;
+            if (rs.next()){
+                bookmark = new Bookmark();
+                bookmark.setType(rs.getString("Type"));
+                bookmark.setName(rs.getString("Name"));
+                bookmark.setUrl(rs.getString("Url"));
+                bookmark.setIcon(rs.getString("Icon"));
+            }
+            return bookmark;
+        }catch (SQLException e){
+            System.out.println(e);
+            return null;
+        }
+        finally{
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    public static Bookmark getBookmarkByType(String Type, int source){
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection(source);
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String query = "SELECT * FROM bookmark " + 
+                "WHERE Type = ?";
+        
+        try{
+            ps = connection.prepareStatement(query);
+            ps.setString(1, Type);
             rs = ps.executeQuery();
             
             Bookmark bookmark = null;

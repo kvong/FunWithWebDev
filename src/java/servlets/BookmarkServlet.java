@@ -12,6 +12,8 @@ package servlets;
  */
 
 import java.io.*;
+import java.io.FileWriter;   
+import java.io.IOException;  
 import javax.servlet.*;
 import java.util.*;
 import javax.servlet.http.*;
@@ -120,6 +122,7 @@ public class BookmarkServlet extends HttpServlet{
                         bookmarkName, bookmarkUrl,
                         bookmarkIcon, bookmarkLogo);
                     
+                    
                     // Check if the this bookmark has already been created
                     if (BookmarkDB.bookmarkExist(bookmark.getName(), 1)){
                         // Print error message and break out of switch statement
@@ -131,6 +134,8 @@ public class BookmarkServlet extends HttpServlet{
                     // If the new bookmark does not exist in the database,
                     // insert it as a new entry
                     BookmarkDB.insert(bookmark, 1);
+                    
+                    incrementUpdateNumber(1);
                     
                     // Get the updated database list
                     ArrayList<Bookmark> bookmarks = BookmarkDB.getBookmarks(1);
@@ -174,6 +179,8 @@ public class BookmarkServlet extends HttpServlet{
                     // connection
                     BookmarkDB.delete(bookmark, 1);
                     
+                    incrementUpdateNumber(1);
+                    
                     // Get the updated database list
                     ArrayList<Bookmark> bookmarks = BookmarkDB.getBookmarks(1);
                     
@@ -216,7 +223,7 @@ public class BookmarkServlet extends HttpServlet{
                     Bookmark newBookmark = new Bookmark();
                     
                     // Grab old bookmark for updating
-                    Bookmark oldBookmark = BookmarkDB.getBookmark(bookmarkName, 1);
+                    Bookmark oldBookmark = BookmarkDB.getBookmarkByName(bookmarkName, 1);
                     // Do not update empty inputs
                     
                     // Updating type
@@ -251,6 +258,8 @@ public class BookmarkServlet extends HttpServlet{
                     
                     // Updating database
                     BookmarkDB.update(bookmarkName, newBookmark, 1);
+                    
+                    incrementUpdateNumber(1);
                     
                     // Get the updated database list
                     ArrayList<Bookmark> bookmarks = BookmarkDB.getBookmarks(1);
@@ -332,4 +341,14 @@ public class BookmarkServlet extends HttpServlet{
         }
         return sortedSections;
     }
+    
+    public static void incrementUpdateNumber(int scope){
+        Bookmark bookmark = BookmarkDB.getBookmarkByType("Update", scope);
+        String oldName = bookmark.getName();
+        int newUpdateNumber = Integer.parseInt(bookmark.getName()) + 1;
+        String newUpdateStr = String.valueOf(newUpdateNumber);
+        bookmark.setName(newUpdateStr);
+        BookmarkDB.update(oldName, bookmark, scope);
+    }
+    
 }

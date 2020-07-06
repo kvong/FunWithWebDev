@@ -45,16 +45,16 @@ public class BookmarkContextListener implements ServletContextListener{
             if (globalUpdateNumber > localUpdateNumber){
                 // Updating local
                 BookmarkDB.deleteAll(1);
-                localBookmarks.get(0).setName(String.valueOf(globalUpdateNumber++));
-                globalBookmarks.get(0).setName(String.valueOf(globalUpdateNumber));
+                localBookmarks.get(0).setName(String.valueOf(globalUpdateNumber));
+                //globalBookmarks.get(0).setName(String.valueOf(globalUpdateNumber));
                 BookmarkDB.insertBulk(globalBookmarks, 1);
                 bookmarks = globalBookmarks;
             }
             else if (localUpdateNumber > globalUpdateNumber){
                 // Updating global
                 BookmarkDB.deleteAll(2);
-                globalBookmarks.get(0).setName(String.valueOf(localUpdateNumber++));
-                localBookmarks.get(0).setName(String.valueOf(localUpdateNumber));
+                globalBookmarks.get(0).setName(String.valueOf(localUpdateNumber));
+                //localBookmarks.get(0).setName(String.valueOf(localUpdateNumber));
                 BookmarkDB.insertBulk(localBookmarks, 2);
                 bookmarks = localBookmarks;
             }
@@ -68,6 +68,7 @@ public class BookmarkContextListener implements ServletContextListener{
         //printAll(bookmarks);
         sc.setAttribute("sections", sortByTypes(bookmarkSections));
         
+        System.out.println(sc.getRealPath("/"));
         //BookmarkDB.syncDB("view");
     }
     
