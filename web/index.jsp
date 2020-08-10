@@ -15,11 +15,7 @@
                 }, function() { console.log("END"); });
             </script>
 
-            <div id="search-bar" style="display: block">
-                <form class="search-bar" action="https://duckduckgo.com/">
-                    <input autofocus type="search" placeholder="Search in DuckDuckGo" autocomplete="off">
-                </form>
-            </div>
+            <iframe class="search-bar" src="https://duckduckgo.com/search.html?prefill=Search DuckDuckGo&bgcolor=ffffff&focus=yes" style="overflow:hidden;margin:0;padding:0;width:600px;height:40px;" frameborder="0"></iframe>
             <div class="terminal-container"  id="table" style="display: block">
                 <div class="bookmark-container">
                     <c:forEach items="${sections}" var="section">
