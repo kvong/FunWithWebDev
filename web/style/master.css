@@ -18,9 +18,9 @@ a {
 
 input{
     padding: 8px 0px;
+    margin: 0px 0px 5px 0px;
     margin-bottom: 5px;
     font-size: 18px;
-    border-radius: 5px;
 }
 
 .options{
@@ -74,6 +74,11 @@ input{
 	top:1px;
 }
 
+.search_button{
+    vertical-align: middle;
+    width: 50%;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -92,6 +97,23 @@ input{
     animation-duration: 1.5s;
 }
 
+.clock {
+    text-align: center;
+    top: 10%;
+    left: 50%;
+    -ms-transform: translate(-50%, -25%);
+    transform: translate(-50%, -25%);
+    position: absolute;
+    color: black;
+    font-size: 45px;
+    animation-name: head_animation;
+    animation-duration: 1.5s;
+}
+
+#search-bar-form{
+    position: relative;
+}
+
 .search-bar {
     top: 34%;
     left: 50%;
@@ -105,13 +127,37 @@ input{
 
 .search-bar input {
     min-width: 600px;
-    border-radius: 5px;
     color: #FFFFFF;
     background-color: rgb(22, 24, 33, 1);
     font-size: 18px;
     border: 0px solid #161821;
     width: 50%;
     padding: 13px;
+}
+
+#search-icon-button{
+    color: #FFFFFF;
+    background-color: rgb(22, 24, 33, 1);
+    border: none;
+    border-radius: 5px 0px 0px 5px;
+    padding: 12px;
+    padding-top: 13px;
+    outline: none;
+    position: relative;
+}
+
+img{
+    vertical-align: top;
+}
+
+#go-button{
+    color: #FFFFFF;
+    background-color: rgb(22, 24, 33, 1);
+    font-size: 18px;
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+    padding: 13px;
+    position: absolute;
 }
 
 .terminal-container {

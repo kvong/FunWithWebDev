@@ -5,6 +5,8 @@
         <group>
             <file>file:/home/blank/NetBeansProjects/MyHomepage/src/java/listener/BookmarkContextListener.java</file>
             <file>file:/home/blank/NetBeansProjects/MyHomepage/src/java/servlets/BookmarkServlet.java</file>
+            <file>file:/home/blank/NetBeansProjects/MyHomepage/web/index.jsp</file>
+            <file>file:/home/blank/NetBeansProjects/MyHomepage/web/style/master.css</file>
         </group>
     </open-files>
 </project-private>

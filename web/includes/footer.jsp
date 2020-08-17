@@ -6,4 +6,7 @@
 
 <p class="foot">&copy; Copyright <%=currentYear %> Khanh Vong</p>
 </body>
+    <script src="https://kit.fontawesome.com/a775dce2c6.js" crossorigin="anonymous"></script>
+    <script src="./js/bookmarking.js"></script>
+    <script src="./js/searchbar.js"></script>
 </html>
