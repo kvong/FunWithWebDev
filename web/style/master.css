@@ -142,8 +142,9 @@ input{
     border-radius: 5px 0px 0px 5px;
     padding: 12px;
     padding-top: 13px;
-    outline: none;
-    position: relative;
+    outline: 0;
+    position: absolute;
+    margin-left:-45px;
 }
 
 img{
