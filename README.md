@@ -64,3 +64,6 @@
 
 - Additional resources:
     - [Enable Remote access to MariaDB/MySQL](https://webdock.io/en/docs/how-guides/how-enable-remote-access-your-mariadbmysql-database)
+
+### How everything works:
+-  [TODO] Synchronization -
