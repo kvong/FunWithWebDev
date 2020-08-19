@@ -13,9 +13,9 @@
         cursor_color    : '#00fd55', // Color of the cursor
         }, function() { console.log("END"); });
     </script>
-    <div id="search-bar" style="display: block">
-        <form class="search-bar" action="https://duckduckgo.com/">
-            <input autofocus type="search" placeholder="Search in DuckDuckGo" autocomplete="off">
+    <div class="search-bar" id="search-bar">
+        <form id="search-bar-form" method="get" action="https://www.duckduckgo.com">
+        <button type="button" id="search-icon-button"><img id="search-icon" src="./icons/ddg.svg" style="filter: invert(1)"></button><input type="search" id="search-input" name="q" placeholder="Searching with DuckDuckGo" autocomplete="off" autofocus/><button id="go-button" type="submit">GO</button>
         </form>
     </div>
     <div class="terminal-container"  id="table" style="display: block">

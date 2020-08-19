@@ -112,6 +112,7 @@ input{
 
 #search-bar-form{
     position: relative;
+    margin-bottom: 10px;
 }
 
 .search-bar {
@@ -168,7 +169,7 @@ img{
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     position: absolute;
-    width: 1080px;
+    width: 1200px;
     border-collapse: separate;
     border-spacing: 10px 5px;
     animation: table_animation 2s linear;
