@@ -1,5 +1,5 @@
 # MyHomePage
-![](./screenshot/screenshot.jpg)
+![](./screenshot/example.gif)
 
 ## Description:
  This is how to guide written from class notes about how to create a dynamic webpage using HTML, CSS, JavaScript, Java Servlets, JSP, JSTL, and MySQL. 
