@@ -10,6 +10,11 @@
  [Netbeans IDE 8.2 - Java EE Bundle](https://netbeans.org/downloads/old/8.2/);
  [Typescripter Animation by eddiewentw](https://github.com/eddiewentw/TypeWriting.js);
 
+### Setting up netbeans_jdkhome:
+- cd <netbean-install>/etc/netbeans.conf
+- Edit the line netbeans_jdkhome to be {jdk-path}
+    - jdk-path can be found by running command `update-java-alternatives -l`
+
 ### Basic How-to Setup:
 - Add different libraries necessary via Netbeans.
 	- Go to the project panel in Netbeans and locate the `Libraries` folder.
