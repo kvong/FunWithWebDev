@@ -3,12 +3,19 @@
 
 ## Description:
  This is how to guide written from class notes about how to create a dynamic webpage using HTML, CSS, JavaScript, Java Servlets, JSP, JSTL, and MySQL. 
- ## Requirements:
- Java JDK 1.8.0 (Set this as environment  variable)
- Apache Tomcat-8.0.27 (Installed during the Netbeans Installation;
- MySQL database;
- [Netbeans IDE 8.2 - Java EE Bundle](https://netbeans.org/downloads/old/8.2/);
- [Typescripter Animation by eddiewentw](https://github.com/eddiewentw/TypeWriting.js);
+## Requirements:
+- Java JDK 1.8.0 (Set this as environment  variable)
+- Apache Tomcat-8.0.27 (Installed during the Netbeans Installation;
+- MySQL database - [How to install mysql on ubuntu-18-04](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04);
+- [Netbeans IDE 8.2 - Java EE Bundle](https://netbeans.org/downloads/old/8.2/);
+- [Typescripter Animation by eddiewentw](https://github.com/eddiewentw/TypeWriting.js);
+ 
+## Install
+- Set Tomcat user:
+    - apache-tomcat-8.0.27/conf/tom-cat-users.xml
+    - Add the following to the xml: `<user username="tomcat" password="tomcat" roles="manager-gui"/>`
+- Go to `localhost:8080` > Manager App > WAR file to deploy > Browse > Deploy
+    - WAR file can be found in this repo
 
 ### Setting up netbeans_jdkhome:
 - cd <netbean-install>/etc/netbeans.conf
